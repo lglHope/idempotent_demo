@@ -1,0 +1,61 @@
+package liu.hope.idempotent_demo.annotations;
+
+import liu.hope.idempotent_demo.enums.ReadWriteTypeEnum;
+
+import java.lang.annotation.ElementType;
+import java.lang.annotation.Retention;
+import java.lang.annotation.RetentionPolicy;
+import java.lang.annotation.Target;
+import java.util.concurrent.TimeUnit;
+
+@Target({ ElementType.METHOD })
+@Retention(RetentionPolicy.RUNTIME)
+public @interface Idempotent {
+
+    /**
+     * 锁的名称，唯一性（默认为方法名）
+     */
+    String value() default "";
+
+    /**
+     * SPEL表达式，获取幂等Key，默认会从线程上下文中获取框架提供的幂等ID
+     */
+    String spelKey() default "";
+
+    /**
+     * 一级存储过期时间
+     */
+    int firstLevelExpireTime() default 10;
+
+    /**
+     * 二级存储过期时间
+     */
+    int secondLevelExpireTime() default 60 * 60 * 24 * 365;
+
+    /**
+     * 读写类型
+     * ORDER：顺序读写，先读一级缓存，没有再都二级缓存，先写一级缓存，再写二级缓存
+     * PARALLEL：并行读写，同时读一级和二级缓存，取返回最快的并且有值的结果，同时写一级和二级缓存
+     */
+    ReadWriteTypeEnum readWriteType() default ReadWriteTypeEnum.PARALLEL;
+
+    /**
+     * 锁的过期时间
+     */
+    int lockExpireTime() default 10;
+
+    /**
+     * 存储时间单位
+     */
+    TimeUnit timeUnit() default TimeUnit.SECONDS;
+
+    /**
+     * 触发幂等限制时调用同类中的方法进行后续处理
+     */
+    String idempotentHandler() default "";
+
+    /**
+     * 触发幂等限制时调用其他类中的方法进行后续处理
+     */
+    Class<?>[] idempotentHandlerClass() default {};
+}
