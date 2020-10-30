@@ -19,9 +19,10 @@ public abstract class AbstractIdempotentAspectSupport {
 
     /**
      * 异常处理
-     * @param pjp 切入点信息
+     *
+     * @param pjp        切入点信息
      * @param idempotent 切入点的注解信息
-     * @param ex 异常
+     * @param ex         异常
      * @return
      * @throws Throwable
      */
@@ -46,6 +47,7 @@ public abstract class AbstractIdempotentAspectSupport {
 
     /**
      * 提取异常处理的方法
+     *
      * @param pjp
      * @param name
      * @param locationClass
@@ -78,7 +80,7 @@ public abstract class AbstractIdempotentAspectSupport {
     }
 
     private Method resolveHandlerInternal(ProceedingJoinPoint pjp, /*@NonNull*/ String name, Class<?> clazz,
-                                               boolean mustStatic) {
+                                          boolean mustStatic) {
         Method originMethod = resolveMethod(pjp);
         Class<?>[] originList = originMethod.getParameterTypes();
         Class<?>[] parameterTypes = Arrays.copyOf(originList, originList.length + 1);
@@ -116,11 +118,12 @@ public abstract class AbstractIdempotentAspectSupport {
 
     /**
      * 获取调用方法
+     *
      * @param joinPoint
      * @return
      */
     protected Method resolveMethod(ProceedingJoinPoint joinPoint) {
-        MethodSignature signature = (MethodSignature)joinPoint.getSignature();
+        MethodSignature signature = (MethodSignature) joinPoint.getSignature();
         Class<?> targetClass = joinPoint.getTarget().getClass();
 
         Method method = getDeclaredMethodFor(targetClass, signature.getName(),
