@@ -1,8 +1,9 @@
 package liu.hope.idempotent_demo.autoconfigure;
 
-import com.cxytiandi.kitty.lock.DistributedLock;
-import com.cxytiandi.kitty.lock.DistributedLockMysql;
-import com.cxytiandi.kitty.lock.DistributedLockRedis;
+
+import liu.hope.idempotent_demo.lock.DistributedLock;
+import liu.hope.idempotent_demo.lock.DistributedLockMysql;
+import liu.hope.idempotent_demo.lock.DistributedLockRedis;
 import org.redisson.api.RedissonClient;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
