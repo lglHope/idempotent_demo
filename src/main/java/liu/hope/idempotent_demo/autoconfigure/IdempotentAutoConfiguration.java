@@ -17,14 +17,6 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.jdbc.core.JdbcTemplate;
 
-/**
- * @作者 尹吉欢
- * @个人微信 jihuan900
- * @微信公众号 猿天地
- * @GitHub https://github.com/yinjihuan
- * @作者介绍 http://cxytiandi.com/about
- * @时间 2020-04-03 23:27
- */
 @Configuration
 @ImportAutoConfiguration(IdempotentProperties.class)
 @AutoConfigureAfter(liu.hope.idempotent_demo.autoconfigure.DistributedLockAutoConfiguration.class)
